@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuxWall — Premium PVC Wall Panels | Transform Walls Into Masterpieces</title>
+<meta name="description" content="Premium PVC wall panels crafted for luxurious interiors, modern homes, offices, hotels and commercial spaces. Shop our exclusive collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root {
+  --white: #FFFFFF;
+  --ivory: #F8F7F4;
+  --charcoal: #111111;
+  --gold: #C9A86A;
+  --gold-light: #E8D5A3;
+  --gold-dark: #A0803D;
+  --grey: #F5F5F5;
+  --grey-mid: #E8E8E8;
+  --grey-text: #888888;
+  --grey-dark: #555555;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-ui: 'Jost', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--charcoal);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+  mix-blend-mode: multiply;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.25s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+  opacity: 0.6;
+}
+
+/* ── LOADING SCREEN ── */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--charcoal);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+}
+.loader-brand {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.loader-brand span { color: var(--gold); }
+.loader-line {
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  animation: loaderLine 1.8s ease forwards;
+}
+.loader-percent {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--grey-text);
+  text-transform: uppercase;
+}
+@keyframes loaderLine { to { width: 200px; } }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 4vw;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.4s;
+}
+.nav-logo span { color: var(--gold); }
+nav.scrolled .nav-logo { color: var(--charcoal); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--gold); }
+nav.scrolled .nav-links a { color: var(--grey-dark); }
+nav.scrolled .nav-links a:hover { color: var(--gold); }
+.nav-actions { display: flex; align-items: center; gap: 1.2rem; }
+.nav-icon {
+  width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.nav-icon:hover { border-color: var(--gold); color: var(--gold); }
+nav.scrolled .nav-icon { border-color: var(--grey-mid); color: var(--charcoal); }
+nav.scrolled .nav-icon:hover { border-color: var(--gold); color: var(--gold); }
+.nav-cart-count {
+  position: absolute;
+  top: -6px; right: -6px;
+  width: 16px; height: 16px;
+  background: var(--gold);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-ui);
+}
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+.hamburger span { width: 24px; height: 1.5px; background: var(--white); transition: all 0.3s; display: block; }
+nav.scrolled .hamburger span { background: var(--charcoal); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  background: var(--charcoal);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 4vw;
+}
+.hero-bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,106,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,106,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+}
+@keyframes gridShift { to { transform: translate(60px, 60px); } }
+.hero-particles { position: absolute; inset: 0; pointer-events: none; }
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: floatParticle var(--dur) var(--delay) ease-in-out infinite alternate;
+}
+@keyframes floatParticle {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0.7; }
+}
+
+.hero-inner {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  padding: 120px 0 80px;
+  position: relative;
+  z-index: 2;
+}
+.hero-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--gold);
+}
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 1.8rem;
+  opacity: 0;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--gold);
+  display: block;
+}
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.55);
+  max-width: 440px;
+  margin-bottom: 2.8rem;
+  font-weight: 300;
+  opacity: 0;
+}
+.hero-buttons {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  opacity: 0;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 2.2rem;
+  height: 54px;
+  background: var(--gold);
+  color: var(--charcoal);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--white);
+  transform: translateX(-100%);
+  transition: transform 0.35s ease;
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
+.btn-primary:hover { color: var(--charcoal); }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 2.2rem;
+  height: 54px;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.hero-stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  opacity: 0;
+}
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--gold);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.4rem;
+}
+
+/* ── HERO PANEL SHOWCASE ── */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+.panel-showcase {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 3/4;
+  position: relative;
+}
+.panel-grid-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+.panel-main {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 3px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 60px 120px rgba(0,0,0,0.7), 0 20px 40px rgba(201,168,106,0.15);
+}
+.panel-tile {
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease;
+}
+.panel-tile::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--tile-bg);
+  opacity: 0.9;
+}
+.panel-tile::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+}
+.panel-tile.marble { --tile-bg: linear-gradient(135deg, #d4cec5, #b8b0a3, #c8c2b8, #a09890); }
+.panel-tile.wood { --tile-bg: linear-gradient(160deg, #5c3d1e, #7a5230, #6b4422, #4a2f14); }
+.panel-tile.gold-accent { --tile-bg: linear-gradient(135deg, #c9a86a, #a07840, #d4b978, #8a6030); }
+.panel-tile.concrete { --tile-bg: linear-gradient(135deg, #888, #666, #777, #555); }
+.panel-tile.white-tex { --tile-bg: linear-gradient(135deg, #f5f5f5, #e8e8e8, #f0f0f0, #ddd); }
+.panel-tile.dark { --tile-bg: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #1a1a2e); }
+.panel-tile.rose { --tile-bg: linear-gradient(135deg, #c9a0a0, #b08080, #d4b0a8, #9a7070); }
+.panel-tile.green { --tile-bg: linear-gradient(135deg, #2d5a27, #3a7a32, #1e4a1a, #4a8040); }
+.panel-tile.black-mar { --tile-bg: linear-gradient(135deg, #1a1a1a, #2a2a2a, #111, #333); }
+.panel-tile.cream { --tile-bg: linear-gradient(135deg, #f5f0e8, #e8e0d0, #f0ead8, #ddd8c0); }
+.panel-tile.teal { --tile-bg: linear-gradient(135deg, #1a5a5a, #2a7a7a, #0f4040, #3a8080); }
+.panel-tile.bronze { --tile-bg: linear-gradient(135deg, #7a5030, #9a6840, #6a4020, #8a5838); }
+.panel-tile:hover { transform: scale(1.04); z-index: 2; }
+
+.floating-badge {
+  position: absolute;
+  background: rgba(17,17,17,0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(201,168,106,0.3);
+  border-radius: 40px;
+  padding: 0.7rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+  animation: floatBadge var(--dur, 3s) var(--delay, 0s) ease-in-out infinite alternate;
+}
+@keyframes floatBadge {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+.floating-badge .badge-icon { font-size: 1rem; }
+.floating-badge .badge-text {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  font-weight: 500;
+}
+.badge-1 { top: 8%; right: -10%; --dur: 3s; --delay: 0s; }
+.badge-2 { top: 35%; left: -15%; --dur: 3.5s; --delay: 0.5s; }
+.badge-3 { bottom: 25%; right: -12%; --dur: 4s; --delay: 1s; }
+.badge-4 { bottom: 8%; left: -8%; --dur: 3.2s; --delay: 1.5s; }
+
+/* ── SECTION COMMONS ── */
+.section { padding: 120px 4vw; }
+.section-inner { max-width: 1400px; margin: 0 auto; }
+.section-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--charcoal);
+  margin-bottom: 1.2rem;
+}
+.section-h2 em { font-style: italic; color: var(--gold); }
+.section-p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--grey-dark);
+  max-width: 520px;
+  font-weight: 300;
+}
+.section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; }
+.section-header-left { flex: 1; }
+.reveal { opacity: 0; transform: translateY(30px); }
+
+/* ── MARQUEE BAND ── */
+.marquee-band {
+  background: var(--gold);
+  overflow: hidden;
+  padding: 14px 0;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 20s linear infinite;
+  gap: 0;
+}
+.marquee-item {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  font-weight: 600;
+  padding: 0 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.marquee-dot { width: 4px; height: 4px; background: var(--charcoal); border-radius: 50%; opacity: 0.4; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ── CATEGORY SECTION ── */
+#categories { background: var(--ivory); }
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+}
+.cat-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  cursor: pointer;
+  background: var(--charcoal);
+}
+.cat-card:nth-child(1) { grid-column: span 1; grid-row: span 2; aspect-ratio: auto; }
+.cat-card-bg {
+  position: absolute; inset: 0;
+  background: var(--bg, linear-gradient(135deg, #222, #111));
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.cat-card:hover .cat-card-bg { transform: scale(1.08); }
+.cat-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+}
+.cat-card-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.8rem 2rem;
+  transform: translateY(8px);
+  transition: transform 0.4s ease;
+}
+.cat-card:hover .cat-card-content { transform: translateY(0); }
+.cat-card-label {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.cat-card:hover .cat-card-label { opacity: 1; }
+.cat-card-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.15;
+}
+.cat-card .cat-card-name { font-size: clamp(1.2rem, 2vw, 1.8rem); }
+.cat-card-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.4s ease;
+}
+.cat-card:hover .cat-card-arrow { opacity: 1; transform: translateX(0); }
+.cat-gold-border {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.5s ease;
+}
+.cat-card:hover .cat-gold-border { width: 100%; }
+
+/* Category background fakes */
+.cat-marble .cat-card-bg { background: linear-gradient(135deg, #d4cec5 0%, #b8b0a3 30%, #c8c2b8 60%, #a09890 100%); }
+.cat-wood .cat-card-bg { background: linear-gradient(160deg, #5c3d1e 0%, #7a5230 40%, #4a2f14 100%); }
+.cat-deco .cat-card-bg { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+.cat-3d .cat-card-bg { background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 50%, #3a3a3a 100%); }
+.cat-ceiling .cat-card-bg { background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d0 100%); }
+.cat-office .cat-card-bg { background: linear-gradient(135deg, #1a3a2a 0%, #2d5a3a 50%, #0f2a1a 100%); }
+
+/* ── PRODUCTS SECTION ── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+.product-card {
+  background: var(--white);
+  position: relative;
+  cursor: pointer;
+  group: true;
+}
+.product-image-wrap {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--grey);
+  position: relative;
+}
+.product-img-bg {
+  width: 100%; height: 100%;
+  background: var(--pbg, linear-gradient(135deg, #ddd, #ccc));
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+.product-card:hover .product-img-bg { transform: scale(1.06); }
+.product-img-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+}
+.product-actions {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+}
+.product-card:hover .product-actions { opacity: 1; transform: translateX(0); }
+.product-action-btn {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+.product-action-btn:hover { background: var(--gold); color: var(--white); }
+.product-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.product-card:hover .product-overlay { opacity: 1; }
+.btn-add-cart {
+  width: 100%;
+  height: 42px;
+  background: var(--charcoal);
+  color: var(--white);
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+}
+.btn-add-cart:hover { background: var(--gold); color: var(--charcoal); }
+.product-badge {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  font-weight: 600;
+}
+.badge-new { background: var(--charcoal); color: var(--white); }
+.badge-hot { background: var(--gold); color: var(--charcoal); }
+.product-info { padding: 1.2rem 0 0; }
+.product-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+}
+.product-price-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+.product-price {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+.product-price-old {
+  font-size: 0.8rem;
+  color: var(--grey-text);
+  text-decoration: line-through;
+  margin-left: 0.5rem;
+}
+.product-stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 0.05em; }
+.product-reviews { font-size: 0.72rem; color: var(--grey-text); margin-left: 0.4rem; }
+
+/* Product bg colors */
+.p1 .product-img-bg { --pbg: linear-gradient(135deg, #e8e0d4, #d4ccc0, #ccc4b8, #e0d8cc); }
+.p2 .product-img-bg { --pbg: linear-gradient(160deg, #4a2f14, #6b4422, #5c3d1e, #7a5230); }
+.p3 .product-img-bg { --pbg: linear-gradient(135deg, #f5f3ef, #eceae4, #f0eeea, #e4e2dc); }
+.p4 .product-img-bg { --pbg: linear-gradient(135deg, #c9a86a, #b09050, #d4b880, #a07840); }
+.p5 .product-img-bg { --pbg: linear-gradient(135deg, #1a1a1a, #2d2d2d, #111, #383838); }
+.p6 .product-img-bg { --pbg: linear-gradient(135deg, #2d5a27, #3a7a32, #1e4a1a, #4a8040); }
+.p7 .product-img-bg { --pbg: linear-gradient(135deg, #c9a0a0, #b08080, #d4b0a8, #9a7070); }
+.p8 .product-img-bg { --pbg: linear-gradient(135deg, #1a3a5a, #2a5a8a, #0f2a4a, #2a4a7a); }
+
+/* ── WHY CHOOSE US ── */
+#why { background: var(--charcoal); }
+#why .section-h2, #why .section-eyebrow { color: var(--white); }
+#why .section-h2 em { color: var(--gold); }
+#why .section-eyebrow::before { background: var(--gold); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  margin-top: 3.5rem;
+}
+.why-card {
+  padding: 3rem 2.5rem;
+  background: var(--charcoal);
+  transition: background 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.why-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.5s ease;
+}
+.why-card:hover::after { width: 100%; }
+.why-card:hover { background: #1a1a1a; }
+.why-number {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(201,168,106,0.15);
+  line-height: 1;
+  margin-bottom: 1rem;
+  transition: color 0.4s;
+}
+.why-card:hover .why-number { color: rgba(201,168,106,0.3); }
+.why-icon {
+  width: 52px; height: 52px;
+  background: rgba(201,168,106,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  transition: background 0.4s;
+  border: 1px solid rgba(201,168,106,0.2);
+}
+.why-card:hover .why-icon { background: rgba(201,168,106,0.2); }
+.why-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+.why-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+}
+
+/* ── ROOM SHOWCASE ── */
+.room-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--grey-mid);
+}
+.room-tab {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem 1.8rem;
+  cursor: pointer;
+  color: var(--grey-text);
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.room-tab.active { color: var(--charcoal); border-bottom-color: var(--gold); }
+.room-tab:hover { color: var(--charcoal); }
+.room-display {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.room-main {
+  aspect-ratio: 16/10;
+  background: var(--charcoal);
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.room-bg {
+  width: 100%; height: 100%;
+  position: absolute; inset: 0;
+  transition: opacity 0.6s ease;
+}
+.room-bg.living { background: linear-gradient(135deg, #c9a86a33, #d4cec522, #b8b0a333); background-color: #2a2420; }
+.room-bg.bedroom { background: linear-gradient(135deg, #1a3a5a33, #2a4a6a22); background-color: #1a2030; }
+.room-bg.office { background: linear-gradient(135deg, #1a3a2a33); background-color: #151f18; }
+.room-bg.hotel { background: linear-gradient(135deg, #3a2a1a33); background-color: #2a1f14; }
+.room-bg.restaurant { background: linear-gradient(135deg, #2a1a1a33); background-color: #1f1515; }
+.room-bg.reception { background: linear-gradient(135deg, #d4cec522); background-color: #252520; }
+.room-label {
+  position: absolute;
+  bottom: 2rem; left: 2rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--white);
+}
+.room-label em { font-style: italic; color: var(--gold); display: block; font-size: 1.2rem; }
+.room-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.room-thumb {
+  aspect-ratio: 1;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+.room-thumb.active { border-color: var(--gold); }
+.room-thumb-bg {
+  width: 100%; height: 100%;
+  transition: transform 0.4s ease;
+}
+.room-thumb:hover .room-thumb-bg { transform: scale(1.05); }
+.room-thumb-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  display: flex; align-items: flex-end;
+  padding: 0.8rem;
+}
+.room-thumb-name {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  font-weight: 500;
+}
+.room-thumb-1 .room-thumb-bg { background: linear-gradient(135deg, #2a2420, #1a1610, #3a3020); }
+.room-thumb-2 .room-thumb-bg { background: linear-gradient(135deg, #1a2030, #0f1520, #2a3040); }
+.room-thumb-3 .room-thumb-bg { background: linear-gradient(135deg, #151f18, #0a1510, #202a22); }
+.room-thumb-4 .room-thumb-bg { background: linear-gradient(135deg, #2a1f14, #1a140c, #3a2a1c); }
+.room-thumb-5 .room-thumb-bg { background: linear-gradient(135deg, #1f1515, #140e0e, #2a1c1c); }
+.room-thumb-6 .room-thumb-bg { background: linear-gradient(135deg, #252520, #1a1a16, #30302a); }
+
+/* Inline "wall panel" art inside room-main */
+.room-panel-art {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.3;
+}
+.room-wall {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 2px;
+  width: 70%; height: 70%;
+}
+.room-wall-tile {
+  background: rgba(201,168,106,0.4);
+  border: 1px solid rgba(201,168,106,0.2);
+}
+.room-wall-tile:nth-child(odd) { background: rgba(255,255,255,0.15); }
+
+/* ── PROJECTS / PORTFOLIO ── */
+#projects { background: var(--ivory); }
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 1rem;
+}
+.project-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.project-card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.project-card:nth-child(4) { grid-column: span 2; }
+.project-card:nth-child(6) { grid-column: span 2; grid-row: span 2; }
+.project-bg {
+  width: 100%; height: 100%;
+  position: absolute; inset: 0;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.project-card:hover .project-bg { transform: scale(1.06); }
+.proj-1 .project-bg { background: linear-gradient(135deg, #c9a86a55, #5c3d1e); }
+.proj-2 .project-bg { background: linear-gradient(135deg, #d4cec5, #a09890); }
+.proj-3 .project-bg { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+.proj-4 .project-bg { background: linear-gradient(135deg, #2d5a27, #1e4a1a); }
+.proj-5 .project-bg { background: linear-gradient(135deg, #3a2a1a, #2a1a0a); }
+.proj-6 .project-bg { background: linear-gradient(135deg, #1a3a5a, #0f2a4a); }
+.proj-7 .project-bg { background: linear-gradient(135deg, #f5f0e8, #e8e0d0); }
+.project-overlay {
+  position: absolute; inset: 0;
+  background: rgba(17,17,17,0);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  transition: background 0.4s ease;
+}
+.project-card:hover .project-overlay { background: rgba(17,17,17,0.65); }
+.project-info { transform: translateY(20px); opacity: 0; transition: all 0.4s ease; }
+.project-card:hover .project-info { transform: translateY(0); opacity: 1; }
+.project-cat {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.project-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--white);
+  font-weight: 400;
+}
+
+/* ── TESTIMONIALS ── */
+#testimonials { background: var(--charcoal); }
+#testimonials .section-h2 { color: var(--white); }
+#testimonials .section-eyebrow { color: var(--gold); }
+#testimonials .section-eyebrow::before { background: var(--gold); }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.testi-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 2.5rem;
+  transition: all 0.4s ease;
+  position: relative;
+}
+.testi-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(201,168,106,0.25);
+  transform: translateY(-4px);
+}
+.testi-quote {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.testi-text {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.65);
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+.testi-author { display: flex; align-items: center; gap: 1rem; }
+.testi-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--av, linear-gradient(135deg, #c9a86a, #a07840));
+  border: 2px solid rgba(201,168,106,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--white);
+  font-weight: 300;
+}
+.testi-name {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.05em;
+}
+.testi-role {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.2rem;
+}
+.testi-stars { color: var(--gold); font-size: 0.75rem; margin-bottom: 0.2rem; }
+
+/* ── STATS ── */
+#stats {
+  background: var(--ivory);
+  padding: 100px 4vw;
+}
+.stats-inner { max-width: 1400px; margin: 0 auto; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.stat-block {
+  padding: 3rem 2.5rem;
+  text-align: center;
+  border-right: 1px solid var(--grey-mid);
+  position: relative;
+}
+.stat-block:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 300;
+  color: var(--charcoal);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.stat-num span { color: var(--gold); }
+.stat-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+.stat-divider {
+  width: 30px; height: 1px;
+  background: var(--gold);
+  margin: 1rem auto;
+}
+
+/* ── TRUST LOGOS ── */
+.trust-logos {
+  overflow: hidden;
+  padding: 40px 0;
+  background: var(--white);
+}
+.logos-track {
+  display: inline-flex;
+  animation: logoScroll 25s linear infinite;
+  gap: 0;
+}
+.logo-item {
+  min-width: 200px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  border-right: 1px solid var(--grey-mid);
+}
+.logo-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--grey-mid);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+.logo-item:hover .logo-name { color: var(--gold); }
+@keyframes logoScroll { to { transform: translateX(-50%); } }
+
+/* ── CTA SECTION ── */
+#cta {
+  background: var(--charcoal);
+  padding: 140px 4vw;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,168,106,0.12) 0%, transparent 60%);
+}
+.cta-bg-lines {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 40px,
+    rgba(201,168,106,0.03) 40px,
+    rgba(201,168,106,0.03) 41px
+  );
+}
+.cta-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.cta-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+.cta-h2 em { font-style: italic; color: var(--gold); }
+.cta-p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.5);
+  max-width: 480px;
+  margin: 0 auto 3rem;
+  line-height: 1.75;
+  font-weight: 300;
+}
+.cta-buttons { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+.btn-cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 2.5rem;
+  height: 58px;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+.btn-cta-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.btn-cta-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 2.5rem;
+  height: 58px;
+  background: var(--gold);
+  color: var(--charcoal);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+.btn-cta-gold:hover { background: var(--white); }
+
+/* ── FOOTER ── */
+footer {
+  background: #0a0a0a;
+  padding: 80px 4vw 40px;
+}
+.footer-inner { max-width: 1400px; margin: 0 auto; }
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 40px;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: block;
+  text-decoration: none;
+}
+.footer-logo span { color: var(--gold); }
+.footer-about {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+.footer-socials { display: flex; gap: 0.8rem; }
+.social-btn {
+  width: 38px; height: 38px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+.social-btn:hover { border-color: var(--gold); color: var(--gold); }
+.footer-col-title {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-links a {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.3s;
+  font-weight: 300;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-links a::before { content: '—'; opacity: 0; transition: opacity 0.3s; font-size: 0.75rem; }
+.footer-links a:hover::before { opacity: 1; }
+.newsletter-form { display: flex; gap: 0; margin-top: 1rem; }
+.newsletter-input {
+  flex: 1;
+  height: 44px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-right: none;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 0 1rem;
+  outline: none;
+}
+.newsletter-input::placeholder { color: rgba(255,255,255,0.25); }
+.newsletter-input:focus { border-color: rgba(201,168,106,0.4); }
+.newsletter-btn {
+  height: 44px;
+  padding: 0 1.2rem;
+  background: var(--gold);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--charcoal);
+  transition: background 0.3s;
+}
+.newsletter-btn:hover { background: var(--white); }
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-copy {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.25);
+  font-weight: 300;
+}
+.footer-copy span { color: var(--gold); }
+.footer-bottom-links { display: flex; gap: 2rem; }
+.footer-bottom-links a {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-bottom-links a:hover { color: var(--gold); }
+
+/* ── CONTACT INFO ── */
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+.contact-icon { color: var(--gold); font-size: 0.9rem; margin-top: 0.15rem; flex-shrink: 0; }
+.contact-text { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.5; font-weight: 300; }
+
+/* ── SCROLL TO TOP ── */
+.scroll-top {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  width: 48px; height: 48px;
+  background: var(--gold);
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--charcoal);
+  font-size: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s;
+  z-index: 100;
+}
+.scroll-top.visible { opacity: 1; pointer-events: all; }
+.scroll-top:hover { background: var(--white); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .testimonials-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 3rem; padding: 100px 0 60px; }
+  .hero-visual { display: none; }
+  .category-grid { grid-template-columns: 1fr 1fr; }
+  .cat-card:nth-child(1) { grid-column: span 2; aspect-ratio: 16/7; }
+  .room-display { grid-template-columns: 1fr; }
+  .room-grid { grid-template-columns: repeat(3, 1fr); }
+  .masonry-grid { grid-template-columns: 1fr 1fr; }
+  .masonry-grid .project-card:nth-child(1) { grid-column: span 2; }
+  .masonry-grid .project-card:nth-child(4) { grid-column: span 1; }
+  .masonry-grid .project-card:nth-child(6) { grid-column: span 2; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .section { padding: 80px 4vw; }
+  .section-header { flex-direction: column; align-items: flex-start; }
+  .why-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .hero-buttons { flex-direction: column; }
+  .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+  .category-grid { grid-template-columns: 1fr; }
+  .cat-card:nth-child(1) { grid-column: span 1; aspect-ratio: 4/5; }
+  .products-grid { grid-template-columns: 1fr; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-brand">Lux<span>Wall</span></div>
+  <div class="loader-line"></div>
+  <div class="loader-percent" id="loaderPct">Loading…</div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Lux<span>Wall</span></a>
+  <ul class="nav-links">
+    <li><a href="#categories">Collections</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="nav-icon" title="Search">&#x2315;</a>
+    <a href="#" class="nav-icon" title="Wishlist" style="font-size:0.85rem;">♡</a>
+    <a href="#" class="nav-icon" style="position:relative;" title="Cart">
+      🛒
+      <span class="nav-cart-count">3</span>
+    </a>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MARQUEE BAND (just above hero content, inside hero) -->
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow" id="heroEyebrow">Premium Interior Solutions</div>
+      <h1 class="hero-h1" id="heroH1">
+        Transform Walls<br>Into
+        <em>Masterpieces</em>
+      </h1>
+      <p class="hero-sub" id="heroSub">
+        Premium PVC Wall Panels crafted for luxurious interiors — modern homes, offices, hotels, and commercial spaces that command attention.
+      </p>
+      <div class="hero-buttons" id="heroButtons">
+        <a href="#products" class="btn-primary">
+          <span>Shop Collection</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="btn-ghost">Request Catalog</a>
+      </div>
+      <div class="hero-stats" id="heroStats">
+        <div>
+          <div class="hero-stat-num">10K+</div>
+          <div class="hero-stat-label">Projects Done</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">500+</div>
+          <div class="hero-stat-label">Designs</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">15 Yrs</div>
+          <div class="hero-stat-label">Experience</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual" id="heroVisual">
+      <div class="panel-showcase">
+        <div class="panel-grid-3d" id="panelGrid">
+          <div class="panel-main">
+            <div class="panel-tile marble"></div>
+            <div class="panel-tile wood"></div>
+            <div class="panel-tile gold-accent"></div>
+            <div class="panel-tile concrete"></div>
+            <div class="panel-tile white-tex"></div>
+            <div class="panel-tile dark"></div>
+            <div class="panel-tile rose"></div>
+            <div class="panel-tile green"></div>
+            <div class="panel-tile black-mar"></div>
+            <div class="panel-tile cream"></div>
+            <div class="panel-tile teal"></div>
+            <div class="panel-tile bronze"></div>
+          </div>
+        </div>
+        <div class="floating-badge badge-1">
+          <span class="badge-icon">💧</span>
+          <span class="badge-text">100% Waterproof</span>
+        </div>
+        <div class="floating-badge badge-2">
+          <span class="badge-icon">🛡</span>
+          <span class="badge-text">Termite Resistant</span>
+        </div>
+        <div class="floating-badge badge-3">
+          <span class="badge-icon">⚡</span>
+          <span class="badge-text">Easy Install</span>
+        </div>
+        <div class="floating-badge badge-4">
+          <span class="badge-icon">✨</span>
+          <span class="badge-text">Premium Finish</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Premium PVC Wall Panels <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Luxury Interiors <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Marble Finish <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Wooden Texture <span class="marquee-dot"></span></span>
+    <span class="marquee-item">3D Wall Panels <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Ceiling Panels <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Office Interiors <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Hotel Lobbies <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Premium PVC Wall Panels <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Luxury Interiors <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Marble Finish <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Wooden Texture <span class="marquee-dot"></span></span>
+    <span class="marquee-item">3D Wall Panels <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Ceiling Panels <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Office Interiors <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Hotel Lobbies <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-header-left">
+        <div class="section-eyebrow">Our Collections</div>
+        <h2 class="section-h2">Explore Every <em>Surface</em></h2>
+      </div>
+      <p class="section-p">From classical marble grandeur to contemporary 3D geometry — every texture, every finish, curated for excellence.</p>
+    </div>
+    <div class="category-grid reveal">
+      <div class="cat-card cat-marble" style="min-height:420px;">
+        <div class="cat-card-bg"></div>
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-card-label">Premium Series</div>
+          <div class="cat-card-name">Marble PVC<br>Panels</div>
+          <div class="cat-card-arrow">Explore Collection →</div>
+        </div>
+        <div class="cat-gold-border"></div>
+      </div>
+      <div class="cat-card cat-wood">
+        <div class="cat-card-bg"></div>
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-card-label">Natural Series</div>
+          <div class="cat-card-name">Wooden Texture</div>
+          <div class="cat-card-arrow">Explore →</div>
+        </div>
+        <div class="cat-gold-border"></div>
+      </div>
+      <div class="cat-card cat-deco">
+        <div class="cat-card-bg"></div>
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-card-label">Artisan Series</div>
+          <div class="cat-card-name">Decorative Panels</div>
+          <div class="cat-card-arrow">Explore →</div>
+        </div>
+        <div class="cat-gold-border"></div>
+      </div>
+      <div class="cat-card cat-3d">
+        <div class="cat-card-bg"></div>
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-card-label">Signature Series</div>
+          <div class="cat-card-name">3D Wall Panels</div>
+          <div class="cat-card-arrow">Explore →</div>
+        </div>
+        <div class="cat-gold-border"></div>
+      </div>
+      <div class="cat-card cat-ceiling">
+        <div class="cat-card-bg"></div>
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-card-label">Overhead Series</div>
+          <div class="cat-card-name">Ceiling Panels</div>
+          <div class="cat-card-arrow">Explore →</div>
+        </div>
+        <div class="cat-gold-border"></div>
+      </div>
+      <div class="cat-card cat-office">
+        <div class="cat-card-bg"></div>
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-content">
+          <div class="cat-card-label">Commercial Series</div>
+          <div class="cat-card-name">Office Interiors</div>
+          <div class="cat-card-arrow">Explore →</div>
+        </div>
+        <div class="cat-gold-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-header-left">
+        <div class="section-eyebrow">Best Sellers</div>
+        <h2 class="section-h2">The <em>Collection</em></h2>
+      </div>
+      <a href="#" class="btn-ghost" style="color:var(--charcoal);border-color:var(--grey-mid);white-space:nowrap;">View All Products</a>
+    </div>
+    <div class="products-grid reveal">
+      <!-- Product 1 -->
+      <div class="product-card p1">
+        <div class="product-image-wrap">
+          <div class="product-img-bg"></div>
+          <div class="product-badge badge-new">New</div>
+          <div class="product-actions">
+            <button class="product-action-btn" title="Wishlist">♡</button>
+            <button class="product-action-btn" title="Quick View">⊕</button>
+          </div>
+          <div class="product-overlay">
+            <button class="btn-add-cart">🛒 Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Calacatta Marble Elite</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹ 285/sq.ft</span><span class="product-price-old">₹ 340</span></div>
+            <div><span class="product-stars">★★★★★</span><span class="product-reviews">(128)</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Product 2 -->
+      <div class="product-card p2">
+        <div class="product-image-wrap">
+          <div class="product-img-bg"></div>
+          <div class="product-badge badge-hot">Hot</div>
+          <div class="product-actions">
+            <button class="product-action-btn" title="Wishlist">♡</button>
+            <button class="product-action-btn" title="Quick View">⊕</button>
+          </div>
+          <div class="product-overlay">
+            <button class="btn-add-cart">🛒 Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Walnut Ridge Texture</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹ 220/sq.ft</span></div>
+            <div><span class="product-stars">★★★★★</span><span class="product-reviews">(94)</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Product 3 -->
+      <div class="product-card p3">
+        <div class="product-image-wrap">
+          <div class="product-img-bg"></div>
+          <div class="product-badge badge-new">New</div>
+          <div class="product-actions">
+            <button class="product-action-btn" title="Wishlist">♡</button>
+            <button class="product-action-btn" title="Quick View">⊕</button>
+          </div>
+          <div class="product-overlay">
+            <button class="btn-add-cart">🛒 Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Arctic White 3D Wave</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹ 195/sq.ft</span><span class="product-price-old">₹ 250</span></div>
+            <div><span class="product-stars">★★★★☆</span><span class="product-reviews">(67)</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Product 4 -->
+      <div class="product-card p4">
+        <div class="product-image-wrap">
+          <div class="product-img-bg"></div>
+          <div class="product-badge badge-hot">Hot</div>
+          <div class="product-actions">
+            <button class="product-action-btn" title="Wishlist">♡</button>
+            <button class="product-action-btn" title="Quick View">⊕</button>
+          </div>
+          <div class="product-overlay">
+            <button class="btn-add-cart">🛒 Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Golden Onyx Luxe</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹ 350/sq.ft</span></div>
+            <div><span class="product-stars">★★★★★</span><span class="product-reviews">(201)</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Product 5 -->
+      <div class="product-card p5">
+        <div class="product-image-wrap">
+          <div class="product-img-bg"></div>
+          <div class="product-actions">
+            <button class="product-action-btn" title="Wishlist">♡</button>
+            <button class="product-action-btn" title="Quick View">⊕</button>
+          </div>
+          <div class="product-overlay">
+            <button class="btn-add-cart">🛒 Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Noir Obsidian Matt</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹ 310/sq.ft</span></div>
+            <div><span class="product-stars">★★★★★</span><span class="product-reviews">(156)</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Product 6 -->
+      <div class="product-card p6">
+        <div class="product-image-wrap">
+          <div class="product-img-bg"></div>
+          <div class="product-badge badge-new">New</div>
+          <div class="product-actions">
+            <button class="product-action-btn" title="Wishlist">♡</button>
+            <button class="product-action-btn" title="Quick View">⊕</button>
+          </div>
+          <div class="product-overlay">
+            <button class="btn-add-cart">🛒 Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Sage Forest Biophilic</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹ 245/sq.ft</span><span class="product-price-old">₹ 290</span></div>
+            <div><span class="product-stars">★★★★☆</span><span class="product-reviews">(43)</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Product 7 -->
+      <div class="product-card p7">
+        <div class="product-image-wrap">
+          <div class="product-img-bg"></div>
+          <div class="product-actions">
+            <button class="product-action-btn" title="Wishlist">♡</button>
+            <button class="product-action-btn" title="Quick View">⊕</button>
+          </div>
+          <div class="product-overlay">
+            <button class="btn-add-cart">🛒 Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Blush Stone Arabesque</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹ 265/sq.ft</span></div>
+            <div><span class="product-stars">★★★★★</span><span class="product-reviews">(89)</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Product 8 -->
+      <div class="product-card p8">
+        <div class="product-image-wrap">
+          <div class="product-img-bg"></div>
+          <div class="product-badge badge-hot">Hot</div>
+          <div class="product-actions">
+            <button class="product-action-btn" title="Wishlist">♡</button>
+            <button class="product-action-btn" title="Quick View">⊕</button>
+          </div>
+          <div class="product-overlay">
+            <button class="btn-add-cart">🛒 Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Sapphire Depth Panel</div>
+          <div class="product-price-row">
+            <div><span class="product-price">₹ 295/sq.ft</span></div>
+            <div><span class="product-stars">★★★★★</span><span class="product-reviews">(112)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section" id="why">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-header-left">
+        <div class="section-eyebrow">Our Promise</div>
+        <h2 class="section-h2" style="color:var(--white);">Why Choose <em>LuxWall</em></h2>
+      </div>
+      <p class="section-p" style="color:rgba(255,255,255,0.45);">Every panel is a statement of craftsmanship, durability, and design excellence. Here's what sets us apart.</p>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-number">01</div>
+        <div class="why-icon">🏆</div>
+        <div class="why-title">Premium Quality Materials</div>
+        <div class="why-desc">Virgin-grade PVC compounds, precision-engineered to international standards. Every panel undergoes rigorous quality testing before leaving our facility.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-number">02</div>
+        <div class="why-icon">💧</div>
+        <div class="why-title">100% Waterproof</div>
+        <div class="why-desc">Completely impermeable surface — ideal for bathrooms, kitchens, and humid commercial spaces. Zero water absorption, zero warping, ever.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-number">03</div>
+        <div class="why-icon">🛡</div>
+        <div class="why-title">Termite Resistant</div>
+        <div class="why-desc">Built-in chemical resistance that permanently protects against termite infestation — no additional treatments required for the panel's lifetime.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-number">04</div>
+        <div class="why-icon">⚡</div>
+        <div class="why-title">Easy Installation</div>
+        <div class="why-desc">Interlocking tongue-and-groove system installs in hours, not days. Compatible with any existing wall surface. No specialist tools needed.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-number">05</div>
+        <div class="why-icon">🌿</div>
+        <div class="why-title">Eco Friendly</div>
+        <div class="why-desc">Manufactured with zero formaldehyde, zero toxic off-gassing. Fully recyclable at end of life. Approved for LEED-certified green building projects.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-number">06</div>
+        <div class="why-icon">✨</div>
+        <div class="why-title">Long-Lasting Finish</div>
+        <div class="why-desc">UV-stable surface coatings retain their lustre for 25+ years. Fade-proof, scratch-resistant, and effortless to maintain with just a damp cloth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOM SHOWCASE -->
+<section class="section" id="rooms" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-header-left">
+        <div class="section-eyebrow">Inspiration Rooms</div>
+        <h2 class="section-h2">See It in <em>Your Space</em></h2>
+      </div>
+      <p class="section-p">Visualize how our panels transform real interiors — from intimate bedrooms to grand hotel lobbies.</p>
+    </div>
+    <div class="room-tabs reveal">
+      <button class="room-tab active" data-room="living">Living Room</button>
+      <button class="room-tab" data-room="bedroom">Bedroom</button>
+      <button class="room-tab" data-room="office">Office</button>
+      <button class="room-tab" data-room="hotel">Hotel Lobby</button>
+      <button class="room-tab" data-room="restaurant">Restaurant</button>
+      <button class="room-tab" data-room="reception">Reception</button>
+    </div>
+    <div class="room-display reveal">
+      <div class="room-main">
+        <div class="room-bg living" id="roomBg"></div>
+        <div class="room-panel-art">
+          <div class="room-wall">
+            <div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div>
+            <div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div>
+            <div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div>
+            <div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div><div class="room-wall-tile"></div>
+          </div>
+        </div>
+        <div class="room-label">
+          <em id="roomTypeLabel">Living Room</em>
+          Calacatta Marble Series
+        </div>
+      </div>
+      <div class="room-grid">
+        <div class="room-thumb room-thumb-1 active" data-room="living">
+          <div class="room-thumb-bg"></div>
+          <div class="room-thumb-overlay"><span class="room-thumb-name">Living Room</span></div>
+        </div>
+        <div class="room-thumb room-thumb-2" data-room="bedroom">
+          <div class="room-thumb-bg"></div>
+          <div class="room-thumb-overlay"><span class="room-thumb-name">Bedroom</span></div>
+        </div>
+        <div class="room-thumb room-thumb-3" data-room="office">
+          <div class="room-thumb-bg"></div>
+          <div class="room-thumb-overlay"><span class="room-thumb-name">Office</span></div>
+        </div>
+        <div class="room-thumb room-thumb-4" data-room="hotel">
+          <div class="room-thumb-bg"></div>
+          <div class="room-thumb-overlay"><span class="room-thumb-name">Hotel Lobby</span></div>
+        </div>
+        <div class="room-thumb room-thumb-5" data-room="restaurant">
+          <div class="room-thumb-bg"></div>
+          <div class="room-thumb-overlay"><span class="room-thumb-name">Restaurant</span></div>
+        </div>
+        <div class="room-thumb room-thumb-6" data-room="reception">
+          <div class="room-thumb-bg"></div>
+          <div class="room-thumb-overlay"><span class="room-thumb-name">Reception</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-header-left">
+        <div class="section-eyebrow">Portfolio</div>
+        <h2 class="section-h2">Featured <em>Projects</em></h2>
+      </div>
+      <p class="section-p">A curated selection of our most distinguished installations — spaces that define the new standard of luxury.</p>
+    </div>
+    <div class="masonry-grid reveal">
+      <div class="project-card proj-1">
+        <div class="project-bg"></div>
+        <div class="project-overlay">
+          <div class="project-info">
+            <div class="project-cat">Luxury Villa · Gurugram</div>
+            <div class="project-name">The Meridian Residence</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-card proj-2">
+        <div class="project-bg"></div>
+        <div class="project-overlay">
+          <div class="project-info">
+            <div class="project-cat">5-Star Hotel · Delhi</div>
+            <div class="project-name">Regal Grand Lobby</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-card proj-3">
+        <div class="project-bg"></div>
+        <div class="project-overlay">
+          <div class="project-info">
+            <div class="project-cat">Corporate Office · Noida</div>
+            <div class="project-name">Vertex Tower HQ</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-card proj-4">
+        <div class="project-bg"></div>
+        <div class="project-overlay">
+          <div class="project-info">
+            <div class="project-cat">Fine Dining · Chandigarh</div>
+            <div class="project-name">Arista Restaurant</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-card proj-5">
+        <div class="project-bg"></div>
+        <div class="project-overlay">
+          <div class="project-info">
+            <div class="project-cat">Penthouse · Mumbai</div>
+            <div class="project-name">Sky Palazzo Suite</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-card proj-6">
+        <div class="project-bg"></div>
+        <div class="project-overlay">
+          <div class="project-info">
+            <div class="project-cat">Luxury Apartment · Rohtak</div>
+            <div class="project-name">Casa Elegante Complex</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-card proj-7">
+        <div class="project-bg"></div>
+        <div class="project-overlay">
+          <div class="project-info">
+            <div class="project-cat">Spa & Wellness · Manesar</div>
+            <div class="project-name">Serenity Wellness Club</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="reveal">
+      <div class="section-eyebrow" style="justify-content:center;">Client Stories</div>
+      <h2 class="section-h2" style="color:var(--white);">What Our <em>Clients</em> Say</h2>
+    </div>
+    <div class="testimonials-grid reveal">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Transformed our entire hotel lobby with their Golden Onyx panels. The quality is extraordinary — guests constantly ask about the walls. LuxWall is now our first call for every project.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="--av:linear-gradient(135deg,#c9a86a,#8a6030);">R</div>
+          <div>
+            <div class="testi-name">Rahul Mehta</div>
+            <div class="testi-role">General Manager, Regal Grand Hotels</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">As an interior designer, I've worked with dozens of panel suppliers. LuxWall's finish quality, consistency, and sheer variety is in a different league. My clients are always blown away.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="--av:linear-gradient(135deg,#b08080,#7a4040);">P</div>
+          <div>
+            <div class="testi-name">Priya Sharma</div>
+            <div class="testi-role">Principal Designer, Studio Eleven</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">We specified LuxWall panels across all 48 units of our luxury apartment project. Installation was seamless, delivery was on time, and the final result exceeded every expectation.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="--av:linear-gradient(135deg,#2d5a27,#1e4a1a);">A</div>
+          <div>
+            <div class="testi-name">Amit Agarwal</div>
+            <div class="testi-role">Director, Skyline Developers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stats-grid">
+      <div class="stat-block reveal">
+        <div class="stat-num"><span class="counter" data-target="10000">0</span><span>+</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-num"><span class="counter" data-target="50000">0</span><span>+</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-num"><span class="counter" data-target="500">0</span><span>+</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Panel Designs</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-num"><span class="counter" data-target="15">0</span><span>+</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST LOGOS -->
+<div class="trust-logos">
+  <div class="logos-track" id="logosTrack">
+    <div class="logo-item"><div class="logo-name">Oberoi Realty</div></div>
+    <div class="logo-item"><div class="logo-name">DLF Homes</div></div>
+    <div class="logo-item"><div class="logo-name">Godrej Properties</div></div>
+    <div class="logo-item"><div class="logo-name">Marriott Hotels</div></div>
+    <div class="logo-item"><div class="logo-name">Hyatt India</div></div>
+    <div class="logo-item"><div class="logo-name">L&T Realty</div></div>
+    <div class="logo-item"><div class="logo-name">Prestige Group</div></div>
+    <div class="logo-item"><div class="logo-name">Brigade Group</div></div>
+    <div class="logo-item"><div class="logo-name">Oberoi Realty</div></div>
+    <div class="logo-item"><div class="logo-name">DLF Homes</div></div>
+    <div class="logo-item"><div class="logo-name">Godrej Properties</div></div>
+    <div class="logo-item"><div class="logo-name">Marriott Hotels</div></div>
+    <div class="logo-item"><div class="logo-name">Hyatt India</div></div>
+    <div class="logo-item"><div class="logo-name">L&T Realty</div></div>
+    <div class="logo-item"><div class="logo-name">Prestige Group</div></div>
+    <div class="logo-item"><div class="logo-name">Brigade Group</div></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-bg-lines"></div>
+  <div style="position:relative;z-index:2;">
+    <div class="cta-eyebrow reveal">Elevate Your Space</div>
+    <h2 class="cta-h2 reveal">Bring <em>Luxury</em><br>To Every Wall</h2>
+    <p class="cta-p reveal">Whether you're designing a single bedroom or an entire hotel — our team of experts is ready to guide you to the perfect finish.</p>
+    <div class="cta-buttons reveal">
+      <a href="#products" class="btn-cta-gold">
+        Shop Now
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#" class="btn-cta-ghost">Get Free Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="#" class="footer-logo">Lux<span>Wall</span></a>
+        <p class="footer-about">Premium PVC wall panels crafted for luxury interiors. From concept to completion, we transform spaces into enduring statements of elegance.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">ig</a>
+          <a href="#" class="social-btn">fb</a>
+          <a href="#" class="social-btn">yt</a>
+          <a href="#" class="social-btn">pt</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Collections</div>
+        <ul class="footer-links">
+          <li><a href="#">Marble PVC Panels</a></li>
+          <li><a href="#">Wooden Texture</a></li>
+          <li><a href="#">Decorative Panels</a></li>
+          <li><a href="#">3D Wall Panels</a></li>
+          <li><a href="#">Ceiling Panels</a></li>
+          <li><a href="#">Office Interiors</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#">About LuxWall</a></li>
+          <li><a href="#">Featured Projects</a></li>
+          <li><a href="#">Trade Program</a></li>
+          <li><a href="#">Installation Guide</a></li>
+          <li><a href="#">Care & Maintenance</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get in Touch</div>
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <span class="contact-text">Plot No. 22, Industrial Area,<br>Rohtak, Haryana — 124001</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📞</span>
+          <span class="contact-text">+91 98765 43210</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">✉</span>
+          <span class="contact-text">hello@luxwall.in</span>
+        </div>
+        <div class="footer-col-title" style="margin-top:1.5rem;">Newsletter</div>
+        <div class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="your@email.com">
+          <button class="newsletter-btn">→</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 <span>LuxWall</span> · Premium PVC Wall Panels · All Rights Reserved</div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ─── LOADER ────────────────────────────────────────────────
+const loader = document.getElementById('loader');
+const loaderPct = document.getElementById('loaderPct');
+let pct = 0;
+const pctInterval = setInterval(() => {
+  pct = Math.min(pct + Math.random() * 15, 100);
+  loaderPct.textContent = Math.floor(pct) + '%';
+  if (pct >= 100) {
+    clearInterval(pctInterval);
+    setTimeout(() => {
+      gsap.to(loader, { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => { loader.style.display = 'none'; initAnimations(); } });
+    }, 400);
+  }
+}, 100);
+
+// ─── CURSOR ────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+  ring.style.transform = `translate(${mx - 18}px, ${my - 18}px)`;
+});
+document.querySelectorAll('a, button, .cat-card, .product-card, .room-thumb, .project-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.style.width = '60px'; ring.style.height = '60px'; ring.style.opacity = '0.35'; });
+  el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.6'; });
+});
+
+// ─── NAV SCROLL ────────────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 600);
+});
+
+// ─── PARTICLES ─────────────────────────────────────────────
+const particleContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.cssText = `
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    --dur:${3+Math.random()*4}s;
+    --delay:${Math.random()*-6}s;
+    --tx:${(Math.random()-0.5)*40}px;
+    --ty:${(Math.random()-0.5)*40}px;
+  `;
+  particleContainer.appendChild(p);
+}
+
+// ─── PANEL 3D MOUSE PARALLAX ───────────────────────────────
+const panelGrid = document.getElementById('panelGrid');
+if (panelGrid) {
+  document.getElementById('hero').addEventListener('mousemove', e => {
+    const hero = document.getElementById('hero');
+    const rect = hero.getBoundingClientRect();
+    const cx = (e.clientX - rect.left) / rect.width - 0.5;
+    const cy = (e.clientY - rect.top) / rect.height - 0.5;
+    panelGrid.style.transform = `rotateY(${cx * 18}deg) rotateX(${-cy * 12}deg)`;
+  });
+  document.getElementById('hero').addEventListener('mouseleave', () => {
+    panelGrid.style.transform = 'rotateY(-8deg) rotateX(4deg)';
+  });
+  panelGrid.style.transform = 'rotateY(-8deg) rotateX(4deg)';
+  panelGrid.style.transition = 'transform 0.6s ease';
+}
+
+// ─── ROOM TABS ─────────────────────────────────────────────
+const roomClasses = { living:'living', bedroom:'bedroom', office:'office', hotel:'hotel', restaurant:'restaurant', reception:'reception' };
+const roomLabels = { living:'Living Room', bedroom:'Bedroom', office:'Office', hotel:'Hotel Lobby', restaurant:'Restaurant', reception:'Reception' };
+document.querySelectorAll('.room-tab, .room-thumb').forEach(el => {
+  el.addEventListener('click', () => {
+    const room = el.dataset.room;
+    document.querySelectorAll('.room-tab').forEach(t => t.classList.toggle('active', t.dataset.room === room));
+    document.querySelectorAll('.room-thumb').forEach(t => t.classList.toggle('active', t.dataset.room === room));
+    const bg = document.getElementById('roomBg');
+    gsap.to(bg, { opacity: 0, duration: 0.3, onComplete: () => {
+      bg.className = `room-bg ${roomClasses[room]}`;
+      gsap.to(bg, { opacity: 1, duration: 0.5 });
+    }});
+    document.getElementById('roomTypeLabel').textContent = roomLabels[room];
+  });
+});
+
+// ─── GSAP + SCROLL TRIGGERS ────────────────────────────────
+function initAnimations() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero entrance
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  tl.to('#heroEyebrow', { opacity: 1, y: 0, duration: 0.8 }, 0.2)
+    .to('#heroH1', { opacity: 1, y: 0, duration: 1 }, 0.4)
+    .to('#heroSub', { opacity: 1, y: 0, duration: 0.8 }, 0.7)
+    .to('#heroButtons', { opacity: 1, y: 0, duration: 0.8 }, 0.9)
+    .to('#heroStats', { opacity: 1, y: 0, duration: 0.8 }, 1.1)
+    .to('#heroVisual', { opacity: 1, x: 0, duration: 1.2 }, 0.5);
+
+  // Scroll reveals
+  gsap.utils.toArray('.reveal').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true } }
+    );
+  });
+
+  // Counters
+  document.querySelectorAll('.counter').forEach(counter => {
+    const target = +counter.dataset.target;
+    ScrollTrigger.create({
+      trigger: counter,
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        gsap.to({ val: 0 }, {
+          val: target,
+          duration: 2,
+          ease: 'power2.out',
+          onUpdate: function() {
+            const v = Math.floor(this.targets()[0].val);
+            counter.textContent = v >= 1000 ? (v/1000).toFixed(0)+'K' : v;
+          }
+        });
+      }
+    });
+  });
+
+  // Parallax hero bg grid
+  gsap.to('.hero-bg-grid', {
+    y: '20%',
+    ease: 'none',
+    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+  });
+}
+</script>
+</body>
+</html>
